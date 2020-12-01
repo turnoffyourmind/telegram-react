@@ -192,6 +192,9 @@ class DialogDetails extends Component {
             return (<MessageGroup key={x.key} senderUserId={x.senderUserId} messages={x.messages} onSelectChat={this.props.onSelectChat}/>);
         });*/
         const { chatId, messageId, wallpaper } = this.state;
+        if (!chatId) {
+            return  null
+        }
 
         let style = null;
         let src = null;

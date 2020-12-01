@@ -450,9 +450,9 @@ class Message extends Component {
                     onContextMenu={this.handleOpenContextMenu}>
                     {showUnreadSeparator && <UnreadSeparator />}
                     <div className='message-body'>
-                        <div className='message-padding'>
-                            <CheckMarkIcon className='message-select-tick' />
-                        </div>
+                        {/*<div className='message-padding'>*/}
+                        {/*    <CheckMarkIcon className='message-select-tick' />*/}
+                        {/*</div>*/}
                         <div className={classNames('message-wrapper', { 'shook': shook })}>
                             {tile}
                             <div
@@ -497,7 +497,7 @@ class Message extends Component {
                             </div>
                             <div className='message-tile-padding' />
                         </div>
-                        <div className='message-padding' />
+                        {/*<div className='message-padding' />*/}
                     </div>
                 </div>
                 <MessageMenu

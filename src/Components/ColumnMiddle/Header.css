@@ -95,6 +95,10 @@
     margin: 6px -2px 6px 6px;
 }
 
+.header-left-back-button {
+    margin: 6px -6px 2px -6px;
+}
+
 .header-right-button {
     margin: 6px 6px 6px 0;
 }

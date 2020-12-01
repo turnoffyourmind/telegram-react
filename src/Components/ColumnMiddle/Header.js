@@ -10,6 +10,7 @@ import classNames from 'classnames';
 import { withTranslation } from 'react-i18next';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '../../Assets/Icons/Search';
+import Back from '../../Assets/Icons/Back';
 import MainMenuButton from './MainMenuButton';
 import HeaderChat from '../Tile/HeaderChat';
 import HeaderCommand from './HeaderCommand';
@@ -25,6 +26,7 @@ import { openChat, searchChat } from '../../Actions/Client';
 import AppStore from '../../Stores/ApplicationStore';
 import ChatStore from '../../Stores/ChatStore';
 import MessageStore from '../../Stores/MessageStore';
+import TdLibController from '../../Controllers/TdLibController';
 import './Header.css';
 
 class Header extends Component {
@@ -80,6 +82,10 @@ class Header extends Component {
             changeChatDetailsVisibility(true);
         }
     };
+
+    handleBack = () => {
+        TdLibController.setChatId(0);
+    }
 
     handleSearchChat = () => {
         const chatId = AppStore.getChatId();
@@ -179,6 +185,12 @@ class Header extends Component {
                 <div className='header-details-content'>
                     <HeaderCommand count={selectionCount} />
                     <div className='header-details-row'>
+                        <IconButton
+                          className='header-left-back-button'
+                          aria-label='Back'
+                          onClick={this.handleBack}>
+                            <Back />
+                        </IconButton>
                         {showProgressAnimation ? (
                             <div
                                 className={classNames('header-status', 'grow', chat ? 'cursor-pointer' : 'cursor-default')}

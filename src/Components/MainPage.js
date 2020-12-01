@@ -43,7 +43,8 @@ class MainPage extends React.Component {
             isSmallWidth,
             forwardInfo: null,
             instantViewContent: null,
-            videoInfo: null
+            videoInfo: null,
+            chatId: AppStore.getChatId(),
         };
     }
 
@@ -56,6 +57,7 @@ class MainPage extends React.Component {
         AppStore.on('clientUpdatePageWidth', this.onClientUpdatePageWidth);
         AppStore.on('clientUpdateProfileMediaViewerContent', this.onClientUpdateProfileMediaViewerContent);
         AppStore.on('clientUpdateForward', this.onClientUpdateForward);
+        AppStore.on('clientUpdateChatId', this.onClientUpdateChatId);
         InstantViewStore.on('clientUpdateInstantViewContent', this.onClientUpdateInstantViewContent);
         PlayerStore.on('clientUpdatePictureInPicture', this.onClientUpdatePictureInPicture);
     }
@@ -69,9 +71,16 @@ class MainPage extends React.Component {
         AppStore.off('clientUpdatePageWidth', this.onClientUpdatePageWidth);
         AppStore.off('clientUpdateProfileMediaViewerContent', this.onClientUpdateProfileMediaViewerContent);
         AppStore.off('clientUpdateForward', this.onClientUpdateForward);
+        AppStore.off('clientUpdateChatId', this.onClientUpdateChatId);
         InstantViewStore.off('clientUpdateInstantViewContent', this.onClientUpdateInstantViewContent);
         PlayerStore.off('clientUpdatePictureInPicture', this.onClientUpdatePictureInPicture);
     }
+    onClientUpdateChatId = update => {
+        this.setState({
+            chatId: update.nextChatId,
+            messageId: update.nextMessageId
+        });
+    };
 
     onClientUpdatePictureInPicture = update => {
         const { videoInfo } = update;
@@ -179,18 +188,18 @@ class MainPage extends React.Component {
             profileMediaViewerContent,
             forwardInfo,
             videoInfo,
-            isSmallWidth
+            isSmallWidth,
+            chatId
         } = this.state;
 
         return (
             <>
                 <div
                     className={classNames('page', {
-                        'page-small': isSmallWidth,
                         'page-third-column': isChatDetailsVisible
                     })}>
-                    <Dialogs />
-                    <DialogDetails ref={this.dialogDetailsRef} />
+                    {chatId ? null : <Dialogs />}
+                    {chatId ? <DialogDetails ref={this.dialogDetailsRef} /> : null}
                     {isChatDetailsVisible && <ChatInfo />}
                 </div>
                 <Actions/>
