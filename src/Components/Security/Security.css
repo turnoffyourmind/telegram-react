@@ -1,0 +1,63 @@
+.security_root {
+    font-size: 20px;
+    height: 100%;
+    position: relative;
+}
+
+.security_setup_row {
+    display: flex;
+    padding: 10px;
+    min-height: 30px;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid  var(--color-accent-main);
+}
+
+.security_enabled {
+    background: #f1a4a4;
+}
+
+.security_disabled {
+    background: #797979;
+}
+
+.security_setup_pin {
+    height: 30px;
+    min-width: 60px;
+}
+.security_warn {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    font-size: 16px;
+    min-height: 60px;
+}
+
+.security_pin_root {
+    padding: 20% 15% 0;
+    font-size: 40px;
+}
+.security_pin_row {
+    display: flex;
+    justify-content: center;
+}
+
+.security_pin_text {
+    border-bottom: 4px solid #99999955;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    margin: 30px 25px;
+}
+.security_pin_number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 33.3%;
+    padding: 25px 0;
+    max-width: 100px;
+    box-shadow: 0 0 5px #99999955;
+    margin: 5px;
+    background: #99999955;
+}

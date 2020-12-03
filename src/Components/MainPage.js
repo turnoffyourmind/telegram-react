@@ -7,6 +7,7 @@
 
 import React from 'react';
 import classNames from 'classnames';
+import Security from './Security';
 import { compose } from '../Utils/HOC';
 import withLanguage from '../Language';
 import withSnackbarNotifications from '../Notifications';
@@ -179,6 +180,11 @@ class MainPage extends React.Component {
 
         this.handleSelectChat(chat.id, null, popup);
     };
+    onUpdatePinStatus = (pinStatus) => {
+        this.setState({
+            pinStatus
+        })
+    }
 
     render() {
         const {
@@ -188,9 +194,13 @@ class MainPage extends React.Component {
             profileMediaViewerContent,
             forwardInfo,
             videoInfo,
-            isSmallWidth,
-            chatId
+            chatId,
+            pinStatus,
         } = this.state;
+
+        if (pinStatus !== 'error') {
+            return <Security onUpdatePinStatus={this.onUpdatePinStatus} pinStatus={pinStatus} />
+        }
 
         return (
             <>
