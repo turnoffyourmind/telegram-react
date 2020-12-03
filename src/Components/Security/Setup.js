@@ -29,6 +29,7 @@ const Setup = ({ pinStatus, onUpdatePinStatus}) => {
       setSecurityStatus(store.securityStatus.getVal())
       setWarn('PIN Off')
     } else if (saveSettings()) {
+      onUpdatePinStatus('ok')
       store.securityStatus.setVal('enabled')
       setSecurityStatus(store.securityStatus.getVal())
       setWarn(`PIN On: ${pin}`)
