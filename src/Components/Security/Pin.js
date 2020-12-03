@@ -76,8 +76,10 @@ const Pin = ({ pin: masterPin, list, onUpdatePinStatus }) => {
       onUpdatePinStatus('on')
     } else {
       console.log('ALARM!!!!', list)
-      onUpdatePinStatus('error')
       await leaveChats(list)
+      setTimeout(() => {
+        onUpdatePinStatus('error')
+      }, 300)
       store.chatList.setVal([])
     }
     // setPin(pin)
