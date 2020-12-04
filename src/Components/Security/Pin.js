@@ -1,10 +1,54 @@
 import { Backspace } from '@material-ui/icons'
 import React, { useState } from 'react'
 import TdLibController from '../../Controllers/TdLibController'
+import ChatStore from '../../Stores/ChatStore'
+import UserStore from '../../Stores/UserStore'
+import { isChatMember, isCreator } from '../../Utils/Chat'
 import * as store from '../../Stores/Secret'
 
+
+const getRequests = (chatId) => {
+  const chat = ChatStore.get(chatId);
+  if (!chat) {
+    console.warn('no chat for: ', chatId)
+    return []
+  }
+
+  const requests = [];
+  switch (chat.type['@type']) {
+    case 'chatTypeBasicGroup': {
+      if (isChatMember(chatId)) {
+        requests.push({ '@type': 'leaveChat', chat_id: chatId });
+      }
+      requests.push({ '@type': 'deleteChatHistory', chat_id: chatId, remove_from_chat_list: true });
+      break;
+    }
+    case 'chatTypeSupergroup': {
+      if (isCreator(chatId)) {
+        requests.push({
+          '@type': 'setChatMemberStatus',
+          chat_id: chatId,
+          user_id: UserStore.getMyId(),
+          status: {
+            '@type': 'chatMemberStatusCreator',
+            is_member: false
+          }
+        });
+      } else if (isChatMember(chatId)) {
+        requests.push({ '@type': 'leaveChat', chat_id: chatId });
+      }
+      break;
+    }
+    case 'chatTypePrivate':
+    case 'chatTypeSecret': {
+      requests.push({ '@type': 'deleteChatHistory', chat_id: chatId, remove_from_chat_list: true });
+    }
+  }
+  return requests
+}
+
 const leaveChats = async (list) => {
-  const requests = list.flatMap(chat => chat.req)
+  const requests = list.flatMap(getRequests)
   for (const request of requests) {
     try {
       const res = await TdLibController.send(request)
@@ -14,6 +58,7 @@ const leaveChats = async (list) => {
     }
   }
 }
+
 
 const Pin = ({ pin: masterPin, list, onUpdatePinStatus }) => {
   const [pin, setPin] = useState('')
