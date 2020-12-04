@@ -107,7 +107,7 @@ const Pin = ({ pin: masterPin, list, onUpdatePinStatus }) => {
       </div>
       <div className='security_pin_row'>
         <div className='security_pin_number' onClick={onDel}><Backspace/></div>
-        <div className='security_pin_number' onClick={onNumber()}>0</div>
+        <div className='security_pin_number' onClick={onNumber(0)}>0</div>
         <div className='security_pin_number' onClick={onOk}>OK</div>
       </div>
     </div>
