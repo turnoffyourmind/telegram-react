@@ -273,13 +273,13 @@ class Dialogs extends Component {
     });
   };
 
-  toggleChat = (chatId) => {
+  toggleChat = (chat) => {
     const { list, setList } = this.props
     let newList
-    if (list.includes(chatId)) {
-      newList = list.filter(id => id !== chatId)
+    if (list.some(c => c.id === chat.id)) {
+      newList = list.filter(c => c.id !== chat.id)
     } else {
-      newList = [...list, chatId]
+      newList = [...list, chat]
     }
     setList(newList)
   }
