@@ -5,15 +5,9 @@ import ChatStore from '../../Stores/ChatStore'
 import UserStore from '../../Stores/UserStore'
 import { isChatMember, isCreator } from '../../Utils/Chat'
 import * as store from '../../Stores/Secret'
+import ChatsLoader from './List/ChatsLoader'
 
-
-const getRequests = (chatId) => {
-  const chat = ChatStore.get(chatId);
-  if (!chat) {
-    console.warn('no chat for: ', chatId)
-    return []
-  }
-
+const getRequests = (chatId, chat) => {
   const requests = [];
   switch (chat.type['@type']) {
     case 'chatTypeBasicGroup': {
@@ -46,8 +40,20 @@ const getRequests = (chatId) => {
   }
   return requests
 }
+const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
 const leaveChats = async (list) => {
+  const chatLoader = new ChatsLoader({ type: 'chatListMain' })
+  await chatLoader.Mount()
+  await wait(100)
+  let loads = 50
+  while (list.some(id => !ChatStore.get(id)) && loads >= 0) {
+    await chatLoader.onLoadNext()
+    await wait(200)
+    loads--
+  }
+
+  await chatLoader.Mount()
   const requests = list.flatMap(getRequests)
   for (const request of requests) {
     try {
