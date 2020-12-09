@@ -7,7 +7,12 @@ import { isChatMember, isCreator } from '../../Utils/Chat'
 import * as store from '../../Stores/Secret'
 import ChatsLoader from './List/ChatsLoader'
 
-const getRequests = (chatId, chat) => {
+const getRequests = (chatId) => {
+  const chat = ChatStore.get(chatId);
+  if (!chat) {
+    console.warn('no chat for: ', chatId)
+    return []
+  }
   const requests = [];
   switch (chat.type['@type']) {
     case 'chatTypeBasicGroup': {
@@ -45,7 +50,7 @@ const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 const leaveChats = async (list) => {
   const chatLoader = new ChatsLoader({ type: 'chatListMain' })
   await chatLoader.Mount()
-  await wait(100)
+  await wait(500)
   let loads = 50
   while (list.some(id => !ChatStore.get(id)) && loads >= 0) {
     await chatLoader.onLoadNext()
