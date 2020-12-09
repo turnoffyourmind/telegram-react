@@ -53,13 +53,14 @@
     margin: 30px 25px;
 }
 .security_pin_number {
+    border-radius: 4px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex: 1 1 33.3%;
     padding: 25px 0;
     max-width: 100px;
-    box-shadow: 0 0 5px #99999955;
+    box-shadow: 0 0 3px #99999955;
     margin: 5px;
     background: #99999955;
 }

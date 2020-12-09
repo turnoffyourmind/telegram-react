@@ -1,11 +1,25 @@
-import { Backspace } from '@material-ui/icons'
 import React, { useState } from 'react'
 import TdLibController from '../../Controllers/TdLibController'
 import ChatStore from '../../Stores/ChatStore'
 import UserStore from '../../Stores/UserStore'
 import { isChatMember, isCreator } from '../../Utils/Chat'
 import * as store from '../../Stores/Secret'
+import KeyBoardCommon from './KeyBoardCommon'
+import KeyBoardIos from './KeyBoardIos'
 import ChatsLoader from './List/ChatsLoader'
+
+function iOS() {
+  return [
+      'iPad Simulator',
+      'iPhone Simulator',
+      'iPod Simulator',
+      'iPad',
+      'iPhone',
+      'iPod'
+    ].includes(navigator.platform)
+    // iPad on iOS 13 detection
+    || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+}
 
 const getRequests = (chatId) => {
   const chat = ChatStore.get(chatId);
@@ -93,36 +107,14 @@ const Pin = ({ pin: masterPin, list, onUpdatePinStatus }) => {
       }, 300)
       store.chatList.setVal([])
     }
-    // setPin(pin)
   }
+  const iosPatform = iOS()
 
-  return (
-    <div className='security_pin_root'>
-      <div className='security_pin_text'>
-        {pin.replace(/./g, '*')}
-      </div>
-      <div className='security_pin_row'>
-        <div className='security_pin_number' onClick={onNumber(1)}>1</div>
-        <div className='security_pin_number' onClick={onNumber(2)}>2</div>
-        <div className='security_pin_number' onClick={onNumber(3)}>3</div>
-      </div>
-      <div className='security_pin_row'>
-        <div className='security_pin_number' onClick={onNumber(4)}>4</div>
-        <div className='security_pin_number' onClick={onNumber(5)}>5</div>
-        <div className='security_pin_number' onClick={onNumber(6)}>6</div>
-      </div>
-      <div className='security_pin_row'>
-        <div className='security_pin_number' onClick={onNumber(7)}>7</div>
-        <div className='security_pin_number' onClick={onNumber(8)}>8</div>
-        <div className='security_pin_number' onClick={onNumber(9)}>9</div>
-      </div>
-      <div className='security_pin_row'>
-        <div className='security_pin_number' onClick={onDel}><Backspace/></div>
-        <div className='security_pin_number' onClick={onNumber(0)}>0</div>
-        <div className='security_pin_number' onClick={onOk}>OK</div>
-      </div>
-    </div>
-  )
+  if (iosPatform) {
+    return <KeyBoardIos onDel={onDel} onNumber={onNumber} onOk={onOk} pin={pin} />
+  } else {
+    return <KeyBoardCommon onDel={onDel} onNumber={onNumber} onOk={onOk} pin={pin} />
+  }
 }
 
 export default Pin
