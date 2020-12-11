@@ -7,11 +7,15 @@ import { compose } from '../../Utils/HOC'
 
 const KeyBoardCommon = ({ pin, onNumber, onDel, onOk, theme }) => {
   const rootCN = cn('security_pin_root', theme.palette.type === 'dark' ? 'security_pin_dark' : 'security_pin_light')
+
+
+  const textElements = [...pin.replace(/./g, '●')]
+    .map(t => <div className='security_pin_text_item'>{t}</div>)
   return (
     <div className={rootCN}>
       <img src={logo} className='security_pin_logo' />
       <div className='security_pin_text'>
-        {pin.replace(/./g, '●')}
+        {textElements}
       </div>
       <div className='security_pin_row'>
         <div className='security_pin_number' onClick={onNumber(1)}>

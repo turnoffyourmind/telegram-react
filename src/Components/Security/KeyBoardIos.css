@@ -22,12 +22,13 @@
     display: flex;
     justify-content: space-around;
 }
-.ios_pin_text_item{
+
+.ios_pin_text_item {
+    display: flex;
     justify-content: center;
     align-items: center;
     width: 22px;
     height: 22px;
-
 }
 
 .ios_pin_row {
