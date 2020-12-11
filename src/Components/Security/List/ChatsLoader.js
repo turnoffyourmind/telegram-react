@@ -16,7 +16,7 @@ import SupergroupStore from '../../../Stores/SupergroupStore'
 import TdLibController from '../../../Controllers/TdLibController'
 import FilterStore from '../../../Stores/FilterStore'
 
-const CHAT_SLICE_LIMIT = 100
+const CHAT_SLICE_LIMIT = 25
 
 class ChatsLoader {
   setState = (patch, cb) => {

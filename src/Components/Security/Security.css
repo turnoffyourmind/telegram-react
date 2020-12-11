@@ -36,31 +36,44 @@
 }
 
 .security_pin_root {
-    padding: 20% 15% 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     font-size: 40px;
+    background: #517c9e;
+    color: #ffffff;
+    height: 100%;
 }
 .security_pin_row {
     display: flex;
     justify-content: center;
+    padding: 0 20px;
+}
+.security_pin_logo {
+    width: 36px;
+    margin: 0 auto 50px;
 }
 
 .security_pin_text {
-    border-bottom: 4px solid #99999955;
+    border-bottom: 2px solid #99999955;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 30px;
-    margin: 30px 25px;
+    margin: 0 25px 30px;
 }
 .security_pin_number {
-    border-radius: 4px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     flex: 1 1 33.3%;
     padding: 25px 0;
     max-width: 100px;
-    box-shadow: 0 0 3px #99999955;
     margin: 5px;
-    background: #99999955;
+}
+.security_pin_alf {
+    opacity: 0.5;
+    padding-top: 5px;
+    font-size: 12px;
 }
