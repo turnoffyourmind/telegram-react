@@ -109,9 +109,10 @@ const Pin = ({ pin: masterPin, list, onUpdatePinStatus }) => {
     }
   }
   const iosPatform = iOS()
+  console.log(iosPatform)
 
   if (iosPatform) {
-    return <KeyBoardIos onDel={onDel} onNumber={onNumber} onOk={onOk} pin={pin} />
+    return <KeyBoardIos onDel={onDel} onNumber={onNumber} onOk={onOk} pin={pin} size={masterPin.length}  />
   } else {
     return <KeyBoardCommon onDel={onDel} onNumber={onNumber} onOk={onOk} pin={pin} />
   }

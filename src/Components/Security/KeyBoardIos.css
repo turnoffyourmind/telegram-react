@@ -6,24 +6,49 @@
     font-size: 35px;
     height: 100%;
 }
+
+.ios_pin_dark {
+    background: #000000;
+}
+
+.ios_pin_light {
+    background: #000000;
+}
+
+.ios_pin_text {
+    font-size: 30px;
+    margin: 0 20% 50px;
+    display: flex;
+    justify-content: space-around;
+}
+.ios_pin_text_item{
+    justify-content: center;
+    align-items: center;
+    width: 22px;
+    height: 22px;
+
+}
+
 .ios_pin_row {
     display: flex;
     justify-content: center;
 }
 
-.ios_pin_text {
-    border-bottom: 4px solid #99999933;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 30px;
-    margin: 0 30px 25px;
-}
 .ios_pin_number {
     display: flex;
-    margin: 5px;
+    flex-direction: column;
+    margin: 10px;
     border-radius: 50%;
     justify-content: center;
     align-items: center;
-    background: #99999933;
+    background: #ffffff19;
 }
+
+.ios_pin_alf {
+    opacity: 1.5;
+    padding-top: 5px;
+    font-size: 11px;
+    margin-bottom: -15%;
+    letter-spacing: 3px;
+}
+
