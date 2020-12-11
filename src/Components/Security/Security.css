@@ -44,6 +44,14 @@
     color: #ffffff;
     height: 100%;
 }
+.security_pin_dark {
+    background: #04080b;
+
+}
+.security_pin_light {
+    background: #517c9e;
+}
+
 .security_pin_row {
     display: flex;
     justify-content: center;
@@ -55,7 +63,7 @@
 }
 
 .security_pin_text {
-    border-bottom: 2px solid #99999955;
+    border-bottom: 1px solid #ffffff33;
     display: flex;
     justify-content: center;
     align-items: center;

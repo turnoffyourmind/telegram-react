@@ -1,6 +1,7 @@
 import { DeleteForever, Lock } from '@material-ui/icons'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import './Security.css'
+import ThemePicker from '../ColumnLeft/ThemePicker'
 import List from './List'
 import * as store from '../../Stores/Secret'
 import Pin from './Pin'
@@ -11,6 +12,12 @@ const Setup = ({ pinStatus, onUpdatePinStatus}) => {
   const [pin, setPin] = useState(store.pin.getVal() || '')
   const [list, setList] = useState(store.chatList.getVal() || [])
   const [openList, setOpenList] = useState(false)
+
+  const themePickerRef = useRef(null)
+
+  const handleAppearance = () => {
+    themePickerRef.current.open();
+  };
 
   const saveSettings = () => {
     if (!/\d{4,}/.test(pin) ) {
@@ -66,6 +73,10 @@ const Setup = ({ pinStatus, onUpdatePinStatus}) => {
       <div className='security_setup_row' onClick={saveSettings}>
         Сохранить настройки
       </div>
+      <div className='security_setup_row' onClick={handleAppearance}>
+        Изменить тему
+      </div>
+      <ThemePicker ref={themePickerRef} />
       {
         enabled && (
           <div className='security_setup_row' onClick={() => onUpdatePinStatus(null)}>

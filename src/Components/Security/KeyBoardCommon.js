@@ -1,10 +1,14 @@
+import withTheme from '@material-ui/core/styles/withTheme'
 import { Backspace } from '@material-ui/icons'
 import logo from '../../Assets/Icons/logo.png'
 import React from 'react'
+import cn from 'classnames'
+import { compose } from '../../Utils/HOC'
 
-const KeyBoardCommon = ({ pin, onNumber, onDel, onOk }) => {
+const KeyBoardCommon = ({ pin, onNumber, onDel, onOk, theme }) => {
+  const rootCN = cn('security_pin_root', theme.palette.type === 'dark' ? 'security_pin_dark' : 'security_pin_light')
   return (
-    <div className='security_pin_root'>
+    <div className={rootCN}>
       <img src={logo} className='security_pin_logo' />
       <div className='security_pin_text'>
         {pin.replace(/./g, '*')}
@@ -69,4 +73,9 @@ const KeyBoardCommon = ({ pin, onNumber, onDel, onOk }) => {
   )
 }
 
-export default KeyBoardCommon
+const enhance = compose(
+  withTheme
+);
+
+
+export default enhance(KeyBoardCommon)
