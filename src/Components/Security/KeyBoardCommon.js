@@ -11,7 +11,7 @@ const KeyBoardCommon = ({ pin, onNumber, onDel, onOk, theme }) => {
     <div className={rootCN}>
       <img src={logo} className='security_pin_logo' />
       <div className='security_pin_text'>
-        {pin.replace(/./g, '*')}
+        {pin.replace(/./g, '●')}
       </div>
       <div className='security_pin_row'>
         <div className='security_pin_number' onClick={onNumber(1)}>
